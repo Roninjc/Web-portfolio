@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+	<!-- Main Stylesheets -->	
+    <link rel="stylesheet" href="{% static 'css/styleO.css' %}">
+    
+</head>
+<body>
+	<!-- Page Preloder 
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>-->
+
+	<!-- Header Section -->
+	<header class="header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="header__social order-1">
+					<a href="#"><i class="facebook"></i></a>
+					<a href="https://www.instagram.com/jesus.castanocandela"><i class="instagram"></i></a>
+				</div>
+				<a href="./index.html" class="site-logo order-2">
+					<img src="{% static 'img/logo.png' %}" alt="">
+				</a>
+				<div class="header__switches order-3">
+					<a href="#" class="search-switch"><i class="fa fa-search"></i></a>
+					<a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
+					<a href="#"><i class="fa fa-shopping-cart"></i></a>
+				</div>
+			</div>
+			<nav class="main__menu">
+				<ul class="nav__menu">
+					<li><a href="./index.html" class="menu--active">Home</a></li>
+					<li><a href="./about.html">About</a></li>
+					<li><a href="./gallery.html">Gallery</a></li>
+					<li><a href="./blog.html">Blog</a>
+						<ul class="sub__menu">
+							<li><a href="./blog-single.html">Blog Single</a></li>
+						</ul>
+					</li>
+					<li><a href="./contact.html">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- Header Section end -->
+</body>
+</html>
