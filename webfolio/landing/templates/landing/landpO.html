@@ -7,6 +7,7 @@
     <title>Welcome</title>
 
 	<!-- Main Stylesheets -->	
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/styleO.css' %}">
     
 </head>
@@ -21,10 +22,14 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="header__social order-1">
-					<a href="#"><i class="facebook"></i></a>
-					<a href="https://www.instagram.com/jesus.castanocandela"><i class="instagram"></i></a>
+					<a href="#">
+						<i class="fa fa-facebook"></i>
+					</a>
+					<a href="https://www.instagram.com/jesus.castanocandela">
+						<i class="fa fa-instagram"></i>
+					</a>
 				</div>
-				<a href="./index.html" class="site-logo order-2">
+				<a href="./index.html" class="site-logo order-2 text-center">
 					<img src="{% static 'img/logo.png' %}" alt="">
 				</a>
 				<div class="header__switches order-3">
