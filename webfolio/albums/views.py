@@ -23,3 +23,10 @@ def upload_image_view(request):
     context = {'imagefile': imagefile, 'name': name, 'ide': ide, 'form': form}
 
     return render(request, 'albums/images.html', context)
+
+def create_tags(request):
+    """Create tags form's view"""
+
+    lasttag = Tag.objects.last()
+
+    tagname = 

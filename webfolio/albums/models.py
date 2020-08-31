@@ -16,16 +16,8 @@ class Image(models.Model):
 class Tag(models.Model):
     """Tags model"""
 
-    tag1 = models.BooleanField()
-    tag2 = models.BooleanField()
-    tag3 = models.BooleanField()
-    tag4 = models.BooleanField()
-    tag5 = models.BooleanField()
-    tag6 = models.BooleanField()
-    tag7 = models.BooleanField()
-    tag8 = models.BooleanField()
-    tag9 = models.BooleanField()
-    tag10 = models.BooleanField()
+    tagname = models.CharField(max_length=60)
+    appearinalbum = models.BooleanField(default=True)
 
     def __str__(self,):
-        return self.tag1
+        return self.tagname
