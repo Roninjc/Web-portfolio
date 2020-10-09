@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/Bonito/.virtualenvs/PortFolio/bin/python"
+    "python.pythonPath": "C:\\Users\\jesus\\envs\\te\\Scripts\\python.exe",
+    "python.linting.pylintPath": "pylint_django"
 }

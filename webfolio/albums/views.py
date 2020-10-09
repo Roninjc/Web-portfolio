@@ -1,32 +1,42 @@
 """albums VIEWS configuration"""
 from django.shortcuts import render
 
-from .models import Image
-from .forms import UploadImageForm
+from .models import Image, Tag
+from .forms import UploadImageForm, CreateTagForm
 
-def upload_image_view(request):
+def upload_image(request):
     """Upload image form's view"""
 
+    """
     lastimage = Image.objects.last()
 
     imagefile = lastimage.imagefile
     name = lastimage.name
     ide = lastimage.id
+    """
 
 
-    form = UploadImageForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
+    imageform = UploadImageForm(request.POST or None, request.FILES or None)
+    if imageform.is_valid():
+        imageform.save()
 
-
-
-    context = {'imagefile': imagefile, 'name': name, 'ide': ide, 'form': form}
+    context = {
+        'imageform': imageform,
+        }
 
     return render(request, 'albums/images.html', context)
 
 def create_tags(request):
     """Create tags form's view"""
 
-    lasttag = Tag.objects.last()
 
-    tagname = 
+
+    tagform = CreateTagForm(request.POST or None, request.FILES or None)
+    if tagform.is_valid():
+        tagform.save()
+
+
+
+    context = {'tagform': tagform}
+
+    return render(request, 'albums/tags.html', context)

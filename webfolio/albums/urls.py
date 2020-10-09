@@ -19,5 +19,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.upload_image_view, name='upload_image_view'),
+    path('imup', views.upload_image, name='upload_image'),
+    path('tacr', views.create_tags, name='create_tags'),
 ]
