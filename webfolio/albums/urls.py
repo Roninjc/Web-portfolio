@@ -17,8 +17,8 @@ from django.urls import path
 
 from . import views
 
-
 urlpatterns = [
-    path('imup', views.upload_image, name='upload_image'),
-    path('tacr', views.create_tags, name='create_tags'),
+    path('tacr/delete/<int:pk>/', views.delete_obj, name='delete-obj'),
+    path('imup', views.upload_image, name='upload-image'),
+    path('tacr', views.create_tags, name='create-tag'),
 ]

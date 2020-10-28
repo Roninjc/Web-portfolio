@@ -1,4 +1,8 @@
 """albums FORMS Configuration"""
+from django.http import HttpResponseRedirect
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
 from django import forms
 from .models import Image, Tag
 
@@ -9,7 +13,7 @@ class UploadImageForm(forms.ModelForm):
     class Meta:
         model = Image
         tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
-        fields = ['name', 'imagefile', 'tags']
+        fields = ['name', 'image_file', 'tags', 'appear_in_album']
 
     def __init__(self, *args, **kwargs):
         # Only in case we build the form from an instance
@@ -42,11 +46,11 @@ class UploadImageForm(forms.ModelForm):
             instance.save()
             self.save_m2m()
 
-        return instance
+        return HttpResponseRedirect('imup')
 
 class CreateTagForm(forms.ModelForm):
     """Create tag form"""
 
     class Meta:
         model = Tag
-        fields = ['tagname', 'appearinalbum']
+        fields = ['tag_name', 'is_a_gallery']

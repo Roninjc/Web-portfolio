@@ -1,26 +1,74 @@
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload Images</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags</title>
+    <link rel='stylesheet' type="text/css" href="{% static "css/styletags.css" %}">
+    <script src="{% static 'js/jstags.js' %}"></script>  
 </head>
 <body>
 
-    <h1>Tag scheme</h1>
+    <div id="main">
+        {% if messages %}
+            <div class="succesmes">
+                {% for message in messages %}
+                    <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </h3>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    <div id="tag" class="creator">
+        <h1>Tag scheme</h1>
+
+        {% if created_tags %}
+            <table id="tags_table">
+                <thead>
+                    <tr>
+                        <th>Tag's name</th>
+                        <th>It's a gallery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tag in created_tags %}
+                        <tr>
+                            <td>{{ tag.tag_name }}</td>
+                            <td>{{ tag.is_a_gallery }}</td>
+                            <td>
+                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value)">Delete</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tags are created.</p>
+        {% endif %}
+
+        <button class="button" onclick="tagForm()">New tag</button>
+    </div>
+
+    <div id="creator" class="tag">
         <h1>Tag Creator</h1>
         <form enctype="multipart/form-data" method="POST" action="">
-        {% csrf_token %}
-        {{ tagform.as_p }}
-        <input type="submit" value="Upload"/>
+            {% csrf_token %}
+            {{ tagform.as_p }}
+            <input type="submit" value="Create"/>
+            <input type="reset" value="Cancel" onclick="cancelForm('creator')"/>
         </form>
+    </div>
 
-        <br><br>
-        <h1>Last tag created is {{ tagname }}, and is the tag nº {{idt}}.</h1>
-        <br><br>
+    <div id="remover" class="tag">
+        <h3 id="comfirMes">Do you want to remove the tag?</h3>
+        <form id="comfir" action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Remove"/>
+            <input type="reset" value="Cancel" onclick="cancelForm('remover')"/>
+        </form>
     </div>
 
 </body>
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'p3plcpnl0769'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script>
-<script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>
 </html>
