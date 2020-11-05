@@ -7,7 +7,40 @@
     <title>Images</title>
 </head>
 <body>
+    <div id="main">
+        <h1>Image gallery</h1>
 
+        {% if uploaded_images %}
+            <table id="images">
+                <thead>
+                    <tr>
+                        <th>Image's name</th>
+                        <th>Image</th>
+                        <th>Tags</th>
+                        <th>It's a gallery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for image in uploaded_images %}
+                        <tr>
+                            <td>{{ image.image_name }}</td>
+                            <td>{{ image.image_file }}</td>
+                            <td>{{ image.tags }}</td>
+                            <td>{{ image.appear_in_almbum }}</td>
+                            <td>
+                                <button value="{{ image.pk }},{{ image.image_name }}" onclick="tagRem(value)">Delete</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No images uploaded.</p>
+        {% endif %}
+
+        <button class="button" onclick="tagForm()">New tag</button>
+    </div>
+    </div>
     <h1>Image Uploader</h1>
     <form enctype="multipart/form-data" method="POST" action="">
     {% csrf_token %}

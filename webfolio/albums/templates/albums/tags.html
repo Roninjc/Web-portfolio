@@ -12,14 +12,15 @@
 
     <div id="main">
         {% if messages %}
-            <div class="succesmes">
-                {% for message in messages %}
-                    <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                        {{ message }}
-                    </h3>
-                {% endfor %}
-            </div>
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="succesmes">
+                        <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </h3>
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endif %}
 
         <h1>Tag scheme</h1>
@@ -53,6 +54,17 @@
 
     <div id="creator" class="tag">
         <h1>Tag Creator</h1>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="errorlist">
+                        <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </h3>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         <form enctype="multipart/form-data" method="POST" action="">
             {% csrf_token %}
             {{ tagform.as_p }}

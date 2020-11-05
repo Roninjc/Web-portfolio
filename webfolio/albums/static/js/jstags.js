@@ -31,3 +31,10 @@ function blur(div) {
     var disdiv = document.getElementById(div);
     disdiv.classList.toggle("disab");
 }
+
+window.onload = function() {
+    if (document.getElementsByClassName('errorlist').length) {
+        blur("main");
+        disp("creator");
+    }
+}

@@ -12,6 +12,7 @@ class Tag(models.Model):
 
     def __str__(self,):
         return self.tag_name
+        
 
 class Image(models.Model):
     """Images model"""

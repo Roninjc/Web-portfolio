@@ -54,3 +54,10 @@ class CreateTagForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = ['tag_name', 'is_a_gallery']
+
+    def clean(self):
+        cleaned_data = super(CreateTagForm, self).clean()
+        tagname = cleaned_data.get('tag_name')
+        if tagname and Tag.objects.filter(tag_name__iexact=tagname).exists():
+            self.add_error('tag_name', ValidationError(_('This tag already exists.'), code='invalid'))
+        return cleaned_data
