@@ -8,14 +8,20 @@ function cancelForm(x) {
     disp(x);
 }
 
-function tagRem(value) {
+function tagRem(value, mod) {
     valueArr = value.split(',');
     blur("main");
     disp("remover");
     var tName = valueArr[1];
-    document.getElementById("comfirMes").innerHTML = "Remove the tag '" + tName + "'?";
+    document.getElementById("comfirMes").innerHTML = "Remove the " + mod + " '" + tName + "'?";
     var obj = valueArr[0];
-    document.getElementById("comfir").action = "tacr/delete/" + obj + "/";
+    if (mod == "tag") {
+        var mode = "tacr"
+    }
+    if (mod == "image") {
+        var mode = "imup"
+    }
+    document.getElementById("comfir").action = mode + "/delete/" + obj + "/";
 }
 
 function disp(element) {

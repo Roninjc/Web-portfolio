@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tags</title>
-    <link rel='stylesheet' type="text/css" href="{% static "css/styletags.css" %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
     <script src="{% static 'js/jstags.js' %}"></script>  
 </head>
 <body>
@@ -39,7 +39,7 @@
                             <td>{{ tag.tag_name }}</td>
                             <td>{{ tag.is_a_gallery }}</td>
                             <td>
-                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value)">Delete</button>
+                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value, 'tag')">Delete</button>
                             </td>
                         </tr>
                     {% endfor %}

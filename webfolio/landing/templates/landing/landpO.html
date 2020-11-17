@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +7,10 @@
     <title>Welcome</title>
 
 	<!-- Main Stylesheets -->	
-	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/styleO.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landpO.css' %}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="{% static 'js/landpO.js' %}"></script>
     
 </head>
 <body>
@@ -19,39 +21,44 @@
 
 	<!-- Header Section -->
 	<header class="header">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="header__social order-1">
-					<a href="#">
-						<i class="fa fa-facebook"></i>
-					</a>
-					<a href="https://www.instagram.com/jesus.castanocandela">
-						<i class="fa fa-instagram"></i>
-					</a>
-				</div>
-				<a href="./index.html" class="site-logo order-2 text-center">
-					<img src="{% static 'img/logo.png' %}" alt="">
-				</a>
-				<div class="header__switches order-3">
-					<a href="#" class="search-switch"><i class="fa fa-search"></i></a>
-					<a href="#" class="nav-switch"><i class="fa fa-bars"></i></a>
-					<a href="#"><i class="fa fa-shopping-cart"></i></a>
-				</div>
-			</div>
-			<nav class="main__menu">
-				<ul class="nav__menu">
-					<li><a href="./index.html" class="menu--active">Home</a></li>
-					<li><a href="./about.html">About</a></li>
-					<li><a href="./gallery.html">Gallery</a></li>
-					<li><a href="./blog.html">Blog</a>
-						<ul class="sub__menu">
-							<li><a href="./blog-single.html">Blog Single</a></li>
-						</ul>
-					</li>
-					<li><a href="./contact.html">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
+		<div id="stuck_container" class="stuck_container">
+            <div class="container">
+                <nav id="menu">
+                    <!--Sf-menu-->
+                    <ul class="sf-menu sf-js-enabled sf-arrows" data-type="navbar">
+                        <li class="active">
+                            <a href="./">Home</a>
+                        </li>
+                        <li>
+                            <a href="index-1.html">Gallery</a>
+                            <ul>
+                                {% if galleries %}
+                                    {% for tag in galleries %}
+                                        <li>
+                                            <a href="#">{{ tag.tag_name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>
+                                        <a href="#">Nothing here</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="index-2.html">About me</a>
+                        </li>
+                        <li>
+                            <a href="index-3.html">Get Involved</a>
+                        </li>
+                        <li>
+                            <a href="index-4.html">Contacts</a>
+                        </li>
+                    </ul>
+                    <!--End Sf-menu-->
+                </nav>
+            </div>
+        </div>
 	</header>
 	<!-- Header Section end -->
 </body>

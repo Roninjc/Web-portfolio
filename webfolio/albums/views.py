@@ -14,6 +14,10 @@ def upload_image(request):
     """Upload image form's view"""
 
     uploaded_images = Image.objects.all()
+    for image in uploaded_images:
+        tags_for_image = image.tags.all()
+        print(uploaded_images)
+        print(tags_for_image)
 
     if request.method == "POST":
         imageform = UploadImageForm(request.POST or None, request.FILES or None)
@@ -31,7 +35,6 @@ def upload_image(request):
 
     return render(request, 'albums/images.html', context)
 
-@never_cache
 def create_tags(request):
     
     """Create tags form's view"""
@@ -63,14 +66,21 @@ def create_tags(request):
 
     return render(request, 'albums/tags.html', context)
 
-def delete_obj(request, pk):
+def delete_obj(request, mode, pk):
     """Delete speific object from database"""
 
-    obj = get_object_or_404(Tag, pk = pk)
+    if mode == "imup":
+        wh = "image"
+        obj = get_object_or_404(Image, pk = pk)
+    if mode == "tacr":
+        wh = "tag"
+        obj = get_object_or_404(Tag, pk = pk)
 
     if request.method == "POST":
+        if wh == "imup":
+            obj.image_file.delete()
         obj.delete()
-        messages.success(request, 'Tag removed succesfully')
-        return redirect('/albums/tacr')
+        messages.success(request, wh.title() + ' removed succesfully')
+        return redirect('/albums/' + mode)
 
-    return render(request, 'albums/tags.html', {'tag': tag})
+    return render(request, 'albums/' + wh + 's.html', {'tag': tag})

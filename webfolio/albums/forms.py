@@ -36,9 +36,8 @@ class UploadImageForm(forms.ModelForm):
         old_save_m2m = self.save_m2m
         def save_m2m():
            old_save_m2m()
-           # This is where we actually link the pizza with tags
-           instance.tag_set.clear()
-           instance.tag_set.add(*self.cleaned_data['tags'])
+           instance.tags.clear()
+           instance.tags.add(*self.cleaned_data['tags'])
         self.save_m2m = save_m2m
 
         # Do we need to save all changes now?
