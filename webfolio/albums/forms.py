@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from django import forms
 from .models import Image, Tag
 
+import datetime
+
 
 class UploadImageForm(forms.ModelForm):
     """Upload image form"""
@@ -40,8 +42,17 @@ class UploadImageForm(forms.ModelForm):
            instance.tags.add(*self.cleaned_data['tags'])
         self.save_m2m = save_m2m
 
+        def set_dimension():
+            print(instance.image_file.height)
+            Image.height = instance.image_file.height
+            Image.width = instance.image_file.width
+        self.set_dimension = set_dimension
+
         # Do we need to save all changes now?
         if commit:
+            #if not instance.name:
+                #self.created = datetime.datetime.today()
+            #self.set_dimension()
             instance.save()
             self.save_m2m()
 

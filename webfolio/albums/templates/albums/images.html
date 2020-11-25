@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Images</title>
-    <link rel='stylesheet' type="text/css" href="{% static "css/styletags.css" %}">
-    <script src="{% static 'js/jstags.js' %}"></script>  
+    <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'css/500pxgallery.css' %}">
+    <script src="{% static 'js/jstags.js' %}"></script>
+    <script src="{% static 'js/500pxgallery.js' %}"></script>
 </head>
 <body>
 
@@ -15,7 +17,7 @@
             {% for message in messages %}
                 {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
                     <div class="succesmes">
-                        <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
                             {{ message }}
                         </h3>
                     </div>
@@ -24,7 +26,21 @@
         {% endif %}
         
         <h1>Image gallery</h1>
+        
+        <button class="button" onclick="tagForm()">New image</button>
 
+        <section id="imgGrid">
+            {% if uploaded_images %}
+                <script>
+                    var gallery = {{ uploaded_images_values_json|safe }}
+                    gallery_creator(gallery);
+                </script>
+            {% else %}
+                <h3>No images yet. What are you waiting for to upload the first one?</h3>
+            {% endif %}
+        </section>
+
+        <!-- 
         {% if uploaded_images %}
             <table id="images">
                 <thead>
@@ -56,8 +72,8 @@
         {% else %}
             <p>No images uploaded.</p>
         {% endif %}
+        -->
 
-        <button class="button" onclick="tagForm()">New image</button>
     </div>
     
     <div id="creator" class="tag">

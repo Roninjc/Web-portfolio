@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#imgGrid {
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.pig-figure {
+    overflow: hidden;
+    left: 0;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+.pig-figure:hover .gip-div {
+    cursor: pointer !important;
+    opacity: 1 !important;
+    max-height: 50px !important;
+}
+.pig-figure:hover .pig-div {
+    cursor: pointer !important;
+    opacity: 1 !important;
+    max-height: 50px !important;
+}
+
+img {
+    transition: filter 0.3s linear;
+    overflow: hidden;
+}
+
+.pig-div {
+    opacity: 0;
+    max-height: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 50px;
+    bottom: 0px;
+    position: absolute;
+    transition: opacity 0.2s ease 0s, max-height 0.2s ease 0s;
+    color: white;
+    background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+}
+
+.gip-div {
+    opacity: 0;
+    max-height: 0px;
+    height: 50px;
+    top: 0px;
+    overflow: visible;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: absolute;
+    transition: opacity 0.2s ease 0s, max-height 0.2s ease 0s;
+    color: white;
+    background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}

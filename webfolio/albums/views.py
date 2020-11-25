@@ -8,17 +8,17 @@ from .forms import UploadImageForm, CreateTagForm
 
 import time
 import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def upload_image(request):
     """Upload image form's view"""
 
     uploaded_images = Image.objects.all()
-    for image in uploaded_images:
-        tags_for_image = image.tags.all()
-        print(uploaded_images)
-        print(tags_for_image)
-
+    uploaded_images_values = uploaded_images.values()
+    uploaded_images_values_json = json.dumps(list(uploaded_images_values), cls=DjangoJSONEncoder)
+    print(uploaded_images_values_json)
+    
     if request.method == "POST":
         imageform = UploadImageForm(request.POST or None, request.FILES or None)
         if imageform.is_valid():
@@ -31,6 +31,7 @@ def upload_image(request):
     context = {
         'imageform': imageform,
         'uploaded_images': uploaded_images,
+        'uploaded_images_values_json': uploaded_images_values_json,
         }
 
     return render(request, 'albums/images.html', context)
