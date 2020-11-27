@@ -7,7 +7,6 @@ body {
 #imgGrid {
     margin: 10px;
     position: relative;
-    overflow: hidden;
     opacity: 0;
     transition: opacity 2s ease;
 }
@@ -22,6 +21,10 @@ body {
     margin-block-end: 0;
     margin-inline-start: 0;
     margin-inline-end: 0;
+}
+
+.pig-figure:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .pig-figure:hover .gip-div {
@@ -71,4 +74,24 @@ img {
     display: flex;
     -webkit-box-pack: end;
     justify-content: flex-end;
+}
+
+#imgGrid button {
+    background-color: rgba(255, 41, 41, 0.501);
+    border: none;
+    border-radius: 20%;
+    color:rgba(255, 255, 255, 0.816);
+    padding: 2px 4px;
+    position: relative;
+    left: 12px;
+}
+
+#imgGrid button:hover {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 8px 0 rgba(255, 0, 0, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
+    transition:  0.2s ease 0s;
+}
+
+#imgGrid button i {
+    pointer-events: none;
 }

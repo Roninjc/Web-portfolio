@@ -4,7 +4,7 @@ var imgWidthAR = [];
 
 function gallery_creator(gallery) {
     var arrayOfObjects = gallery;
-    var windowAR = window.innerWidth/window.innerHeight+2.5;
+    var windowAR = window.innerWidth/window.innerHeight+1;
     var galleryGrid = document.getElementById("imgGrid");
     var sectionInfo = galleryGrid.getBoundingClientRect();
     var sectionWidth = sectionInfo.width-17;
@@ -21,24 +21,6 @@ function gallery_creator(gallery) {
     var totalHeightSection = 0;
     
     orderGallery();
-
-    /* Hay que editar esta aprte para hacer que se actualice el grid al cambiar el tamaño de la ventana.
-    
-    window.addEventListener("resize", heightMaths);
-
-    function heightMaths() {
-        windowAR = window.innerWidth/window.innerHeight+2.5;
-        maxWidthColumn = window.innerWidth-30;
-        maxHeightRow = maxWidthColumn/windowAR;
-
-        console.log(maxWidthColumn, maxHeightRow, windowAR);
-        clearBox("imgGrid");
-        orderGallery();
-    }
-
-    function clearBox(elementID) {
-        document.getElementById(elementID).innerHTML = "";
-    }*/
 
     function gcd(a, b) {
         if (b == 0)
@@ -64,6 +46,8 @@ function gallery_creator(gallery) {
             var figureGrid = document.createElement("figure");
             var div1 = document.createElement("div");
             var div2 = document.createElement("div");
+            var remButton = document.createElement("button");
+            var icBut = document.createElement("i");
             var imageWidth = image.width;
             var imageHeight = image.height;
             var imageReduction = maxHeightRow/imageHeight;
@@ -78,7 +62,7 @@ function gallery_creator(gallery) {
             idObject["Im" + i] = iAR;
             gridAR += iARWidth/iARHeight;
 
-            if (gridAR > windowAR) {
+            if (gridAR > windowAR || i == arrayOfObjects.length-1) {
 
                 var elInObj = countProperties(idObject);
                 finalRowHeight = (maxWidthColumn-((elInObj-1)*columnMargin))/gridAR;
@@ -119,6 +103,13 @@ function gallery_creator(gallery) {
                 figureGrid.appendChild(div1);
                 div2.classList.add("gip-div");
                 figureGrid.appendChild(div2);
+                remButton.value = (image.id + "," + image.name);
+                remButton.classList.add("delImg");
+                div1.appendChild(remButton);
+                icBut.classList.add("material-icons");
+                icBut.classList.add("delImg");
+                icBut.innerHTML = "delete_outline";
+                remButton.appendChild(icBut);
             }
         }
         imgTarget = document.getElementById('imgGrid').getElementsByTagName("img");
@@ -140,7 +131,6 @@ function gallery_creator(gallery) {
             counter++;
             if ( counter === len ) {
                 figResize();
-                console.log(imgWidthAR);
             }
         }
 
@@ -159,6 +149,7 @@ function gallery_creator(gallery) {
     }
 }
 
+/* Esta parte es para recalcular el tamaño de todo al cambiar la pantalla
 function galleryNewSize() {
     var actWindowWidth = window.innerWidth;
     for (i = 0; i < imgTarget.length; i++) {
@@ -167,4 +158,15 @@ function galleryNewSize() {
     }
 }
 
-window.addEventListener("resize", galleryNewSize);
+window.addEventListener("resize", galleryNewSize);*/
+
+document.addEventListener("click", function(event){
+    var targetElement = event.target || event.srcElement;
+    var targetElClass = targetElement.classList;
+    console.log(targetElement);
+    if (targetElClass.contains("delImg")) {
+        var val = targetElement.value;
+        tagRem(val, 'image');
+        console.log(val);
+    }
+});

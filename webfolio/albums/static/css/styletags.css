@@ -1,3 +1,8 @@
+
+h1 {
+    text-align: center;
+}
+
 .tag {
     display: none;
     width: 300px;
@@ -37,4 +42,33 @@
     -o-filter: blur(3px);
     -ms-filter: blur(3px);
     filter: blur(3px);
+}
+
+button.newFoto {
+    background-color: rgba(33, 184, 76, 0.761);
+    border: none;
+    border-radius: 25px;
+    color:rgba(255, 255, 255, 0.816);
+    position: relative;
+    transform: translate(-50%, 0);
+    left: 50%;
+    width: 200px;
+    text-align: center;
+}
+
+button.newFoto span {
+    vertical-align: middle;
+}
+
+button.newFoto i {
+    vertical-align: middle;
+}
+
+button.newFoto:hover {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
+}
+
+button.newFoto i {
+    pointer-events: none;
 }

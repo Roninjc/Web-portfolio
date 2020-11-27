@@ -7,6 +7,8 @@
     <title>Images</title>
     <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
     <link rel='stylesheet' type="text/css" href="{% static 'css/500pxgallery.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <script src="{% static 'js/jstags.js' %}"></script>
     <script src="{% static 'js/500pxgallery.js' %}"></script>
 </head>
@@ -27,7 +29,10 @@
         
         <h1>Image gallery</h1>
         
-        <button class="button" onclick="tagForm()">New image</button>
+        <button class="newFoto" onclick="tagForm()">
+            <span>Load images</span>
+            <i class="material-icons">add</i>
+        </button>
 
         <section id="imgGrid">
             {% if uploaded_images %}
@@ -39,40 +44,6 @@
                 <h3>No images yet. What are you waiting for to upload the first one?</h3>
             {% endif %}
         </section>
-
-        <!-- 
-        {% if uploaded_images %}
-            <table id="images">
-                <thead>
-                    <tr>
-                        <th>Image's name</th>
-                        <th>Image</th>
-                        <th>Tags</th>
-                        <th>It's a gallery</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for image in uploaded_images %}
-                        <tr>
-                            <td>{{ image.name }}</td>
-                            <td><img src='/media/{{ image.image_file }}' width="200"/td>
-                            <td>
-                                {% for tag in image.tags.all %}
-                                    {{ tag }},
-                                {% endfor %}.
-                            </td>
-                            <td>{{ image.appear_in_album }}</td>
-                            <td>
-                                <button value="{{ image.pk }},{{ image.name }}" onclick="tagRem(value, 'image')">Delete</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No images uploaded.</p>
-        {% endif %}
-        -->
 
     </div>
     
