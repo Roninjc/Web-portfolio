@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags</title>
+    <title>Images</title>
     <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
-    <script src="{% static 'js/jstags.js' %}"></script>  
+    <link rel='stylesheet' type="text/css" href="{% static 'css/500pxgallery.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <script src="{% static 'js/jstags.js' %}"></script>
+    <script src="{% static 'js/500pxgallery.js' %}"></script>
 </head>
 <body>
 
@@ -15,45 +19,39 @@
             {% for message in messages %}
                 {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
                     <div class="succesmes">
-                        <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
                             {{ message }}
                         </h3>
                     </div>
                 {% endif %}
             {% endfor %}
         {% endif %}
+        
+        <h1>Image gallery</h1>
+        
+        <button class="newFoto" onclick="tagForm()">
+            <span>Load images</span>
+            <i class="material-icons">add</i>
+        </button>
 
-        <h1>Tag scheme</h1>
+        <section id="imgGrid">
+            {% if uploaded_images %}
+                <script>
+                    var gallery = {{ uploaded_images_values_json|safe }}
+                    gallery_creator(gallery);
+                </script>
+            {% else %}
+                <h3>No images yet. What are you waiting for to upload the first one?</h3>
+                <script>
+                    sectionAppear();
+                </script>
+            {% endif %}
+        </section>
 
-        {% if created_tags %}
-            <table id="tags_table">
-                <thead>
-                    <tr>
-                        <th>Tag's name</th>
-                        <th>It's a gallery</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for tag in created_tags %}
-                        <tr>
-                            <td>{{ tag.tag_name }}</td>
-                            <td>{{ tag.is_a_gallery }}</td>
-                            <td>
-                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value, 'tag')">Delete</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No tags are created.</p>
-        {% endif %}
-
-        <button class="button" onclick="tagForm()">New tag</button>
     </div>
-
+    
     <div id="creator" class="tag">
-        <h1>Tag Creator</h1>
+        <h1>Image Uploader</h1>
         {% if messages %}
             {% for message in messages %}
                 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
@@ -67,8 +65,8 @@
         {% endif %}
         <form enctype="multipart/form-data" method="POST" action="">
             {% csrf_token %}
-            {{ tagform.as_p }}
-            <input type="submit" value="Create"/>
+            {{ imageform.as_p }}
+            <input type="submit" value="Upload"/>
             <input type="reset" value="Cancel" onclick="cancelForm('creator')"/>
         </form>
     </div>

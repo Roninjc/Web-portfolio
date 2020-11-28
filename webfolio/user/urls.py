@@ -1,4 +1,4 @@
-"""albums URL Configuration
+"""user URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -21,4 +21,5 @@ urlpatterns = [
     path('<str:mode>/delete/<int:pk>/', views.delete_obj, name='delete-obj'),
     path('imup', views.upload_image, name='upload-image'),
     path('tacr', views.create_tags, name='create-tag'),
+    path('', views.user_panel, name='user-panel'),
 ]

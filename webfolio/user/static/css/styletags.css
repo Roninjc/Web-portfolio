@@ -1,0 +1,178 @@
+
+html, body, h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #ececed;
+    font-weight: normal;
+    padding-left: 25%;
+}
+
+.tag {
+    display: none;
+    width: 300px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: cadetblue;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+#main {
+    position: relative;
+    text-align: center;
+}
+
+.succesmes {
+    text-align: center;
+    border-radius: 7px;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    animation: vanish 3s forwards;
+}
+
+@keyframes vanish {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        display: none;
+        opacity: 0;
+    }
+}
+
+.disab {
+    pointer-events: none;
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
+button.newFoto {
+    background-color: rgba(33, 184, 76, 0.761);
+    border: none;
+    border-radius: 25px;
+    color:rgba(255, 255, 255, 0.816);
+    position: relative;
+    transform: translate(-50%, 0);
+    left: 50%;
+    width: 200px;
+    text-align: center;
+}
+
+button.newFoto:focus {
+    border: none;
+    outline: none;
+    text-shadow: inset 0 0 2px rgba(255, 255, 255, 0.6);
+    -moz-box-shadow: inset 0 0 8px 0 rgba(24, 110, 13, 0.5), inset 0 0 15px 0 rgba(255, 182, 182, 0.3);
+    -webkit-box-shadow: inset 0 0 8px 0 rgba(24, 110, 13, 0.5), inset 0 0 15px 0 rgba(255, 182, 182, 0.3);
+    box-shadow: inset 0 0 8px 0 rgba(24, 110, 13, 0.5), inset 0 0 15px 0 rgba(255, 182, 182, 0.3);
+}
+
+button.newFoto span {
+    vertical-align: middle;
+}
+
+button.newFoto i {
+    vertical-align: middle;
+}
+
+button.newFoto:hover {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+    -moz-box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
+    -webkit-box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
+    box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
+}
+
+button.newFoto i {
+    pointer-events: none;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidenav cont";
+    grid-template-columns: 25vw 75vw;
+    grid-template-rows: 10vh 90vh;
+}
+
+#head {
+    grid-area: header;
+    background-image: linear-gradient(rgb(18, 55, 72), rgb(7, 21, 29));
+    padding: 10px 0;
+}
+
+.sidenav {
+    grid-area: sidenav;
+    background-color: rgb(7, 21, 29);
+    text-align: left;
+}
+
+.cont {
+    display: none;
+    grid-area: cont;
+    background-color: lightcoral;
+}
+  
+.sidenav a {
+    padding: 1em 6px 1em 30px;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #818181;
+    display: block;
+}
+  
+.sidenav button {
+    padding: 1em 6px 1em 30px;
+    background-color: transparent;
+    text-decoration: none;
+    width: 25vw;
+    font-size: 1.5em;
+    color: #818181;
+    display: block;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+}
+  
+.sidenav button:hover {
+    color: #f1f1f1;
+    -moz-box-shadow: 0 0 8px 0 rgba(21, 121, 175, 0.5), 0 0 15px 0 rgba(195, 232, 252, 0.3);
+    -webkit-box-shadow: 0 0 8px 0 rgba(21, 121, 175, 0.5), 0 0 15px 0 rgba(195, 232, 252, 0.3);
+    box-shadow: 0 0 8px 0 rgba(21, 121, 175, 0.5), 0 0 15px 0 rgba(195, 232, 252, 0.3);
+}
+
+.sidenav button:focus {
+    color: #f1f1f1;
+    background-color: rgba(19, 44, 56, 0.693);;
+    border: none;
+    outline: none;
+    -moz-box-shadow: inset 0 0 8px 0 rgba(21, 121, 175, 0.5), inset 0 0 15px 0 rgba(130, 167, 187, 0.3);
+    -webkit-box-shadow: inset 0 0 8px 0 rgba(21, 121, 175, 0.5), inset 0 0 15px 0 rgba(130, 167, 187, 0.3);
+    box-shadow: inset 0 0 8px 0 rgba(21, 121, 175, 0.5), inset 0 0 15px 0 rgba(130, 167, 187, 0.3);
+}
+
+.sep {
+    border: 1px solid #81818148;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;
+    border-style: inset;
+}
+
+#over {
+    display: block;
+}

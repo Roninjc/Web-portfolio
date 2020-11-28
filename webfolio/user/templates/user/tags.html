@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags</title>
+    <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <script src="{% static 'js/jstags.js' %}"></script>  
+</head>
+<body>
+
+    <div id="main">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="succesmes">
+                        <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </h3>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <h1>Tag scheme</h1>
+
+        <button class="newFoto" onclick="tagForm()">
+            <span>Create tag</span>
+            <i class="material-icons">add</i>
+        </button>
+
+        {% if created_tags %}
+            <table id="tags_table">
+                <thead>
+                    <tr>
+                        <th>Tag's name</th>
+                        <th>It's a gallery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tag in created_tags %}
+                        <tr>
+                            <td>{{ tag.tag_name }}</td>
+                            <td>{{ tag.is_a_gallery }}</td>
+                            <td>
+                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value, 'tag')">Delete</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tags are created.</p>
+        {% endif %}
+    </div>
+
+    <div id="creator" class="tag">
+        <h1>Tag Creator</h1>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="errorlist">
+                        <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </h3>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form enctype="multipart/form-data" method="POST" action="">
+            {% csrf_token %}
+            {{ tagform.as_p }}
+            <input type="submit" value="Create"/>
+            <input type="reset" value="Cancel" onclick="cancelForm('creator')"/>
+        </form>
+    </div>
+
+    <div id="remover" class="tag">
+        <h3 id="comfirMes">Do you want to remove the tag?</h3>
+        <form id="comfir" action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Remove"/>
+            <input type="reset" value="Cancel" onclick="cancelForm('remover')"/>
+        </form>
+    </div>
+
+</body>
+</html>

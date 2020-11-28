@@ -1,4 +1,4 @@
-"""albums MODELS Configuration"""
+"""user MODELS Configuration"""
 from django.db import models
 import datetime
 
@@ -20,7 +20,7 @@ class Image(models.Model):
 
     name = models.CharField(max_length=200)
     image_file = models.ImageField(
-        upload_to = 'albums/images/',
+        upload_to = 'user/images/',
         unique=True,
         height_field='height',
         width_field='width')

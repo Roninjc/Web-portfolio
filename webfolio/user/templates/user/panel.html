@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Images</title>
+    <title>Panel</title>
     <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
-    <link rel='stylesheet' type="text/css" href="{% static 'css/500pxgallery.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <script src="{% static 'js/jstags.js' %}"></script>
-    <script src="{% static 'js/500pxgallery.js' %}"></script>
 </head>
 <body>
 
@@ -27,25 +25,38 @@
             {% endfor %}
         {% endif %}
         
-        <h1>Image gallery</h1>
-        
-        <button class="newFoto" onclick="tagForm()">
-            <span>Load images</span>
-            <i class="material-icons">add</i>
-        </button>
-
-        <section id="imgGrid">
-            {% if uploaded_images %}
-                <script>
-                    var gallery = {{ uploaded_images_values_json|safe }}
-                    gallery_creator(gallery);
-                </script>
-            {% else %}
-                <h3>No images yet. What are you waiting for to upload the first one?</h3>
-            {% endif %}
-        </section>
-
+        <div id="grid-container">
+            <div id="head">
+                <h1>Configuration panel</h1>
+            </div>
+            
+            <div class="sidenav">
+                <hr class="sep">
+                <button autofocus>Overview</button>
+                <hr class="sep">
+                <button href="#">Images and tags</button>
+                <hr class="sep">
+                <button href="#">Landing page</button>
+                <hr class="sep">
+                <button href="#">About me page</button>
+                <hr class="sep">
+                <button href="#">Get involved page</button>
+                <hr class="sep">
+                <button href="#">Contact page</button>
+            </div>
+    
+            <div id="over" class="cont">
+                kjds,hgslk
+            </div>
+            <div id="imta" class="cont"></div>
+            <div id="land" class="cont"></div>
+            <div id="abou" class="cont"></div>
+            <div id="geti" class="cont"></div>
+            <div id="cont" class="cont"></div>
+        </div>
+    
     </div>
+        
     
     <div id="creator" class="tag">
         <h1>Image Uploader</h1>

@@ -2,6 +2,11 @@
 var imgHeightAR = [];
 var imgWidthAR = [];
 
+function sectionAppear() {
+    var galleryGrid = document.getElementById("imgGrid");
+    galleryGrid.style.opacity = 1;
+}
+
 function gallery_creator(gallery) {
     var arrayOfObjects = gallery;
     var windowAR = window.innerWidth/window.innerHeight+1;

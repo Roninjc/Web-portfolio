@@ -1,4 +1,4 @@
-"""albums VIEWS configuration"""
+"""user VIEWS configuration"""
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
@@ -10,11 +10,24 @@ import time
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
+def user_panel(request):
+    """User's config panel"""
+    
+    uploaded_images = Image.objects.all()
+    created_tags = Tag.objects.all()
+
+    context = {
+        'uploaded_images': uploaded_images,
+        'created_tags': created_tags,
+        }
+
+    return render(request, 'user/panel.html', context)
 
 def upload_image(request):
     """Upload image form's view"""
 
     uploaded_images = Image.objects.all()
+    print(uploaded_images)
     uploaded_images_values = uploaded_images.values()
     uploaded_images_values_json = json.dumps(list(uploaded_images_values), cls=DjangoJSONEncoder)
     print(uploaded_images_values_json)
@@ -24,7 +37,7 @@ def upload_image(request):
         if imageform.is_valid():
             imageform.save()
             messages.success(request, 'Image uploaded succesfully')
-            return redirect('/albums/imup')
+            return redirect('/user/imup')
     else:
         imageform = UploadImageForm()
 
@@ -34,7 +47,7 @@ def upload_image(request):
         'uploaded_images_values_json': uploaded_images_values_json,
         }
 
-    return render(request, 'albums/images.html', context)
+    return render(request, 'user/images.html', context)
 
 def create_tags(request):
     
@@ -47,7 +60,7 @@ def create_tags(request):
         if tagform.is_valid():
             tagform.save()
             messages.success(request, 'Tag added succesfully')
-            return redirect('/albums/tacr')
+            return redirect('/user/tacr')
         else:
             err = tagform.errors.as_json()
             errDict = json.loads(err)
@@ -65,7 +78,7 @@ def create_tags(request):
         'created_tags': created_tags,
         }
 
-    return render(request, 'albums/tags.html', context)
+    return render(request, 'user/tags.html', context)
 
 def delete_obj(request, mode, pk):
     """Delete speific object from database"""
@@ -82,6 +95,6 @@ def delete_obj(request, mode, pk):
             obj.image_file.delete()
         obj.delete()
         messages.success(request, wh.title() + ' removed succesfully')
-        return redirect('/albums/' + mode)
+        return redirect('/user/' + mode)
 
-    return render(request, 'albums/' + wh + 's.html', {'tag': tag})
+    return render(request, 'user/' + wh + 's.html', {'tag': tag})

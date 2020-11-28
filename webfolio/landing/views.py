@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from albums.models import Image, Tag
-from albums.forms import UploadImageForm, CreateTagForm
+from user.models import Image, Tag
+from user.forms import UploadImageForm, CreateTagForm
 
 
 def landpage(request):
