@@ -14,11 +14,15 @@ def user_panel(request):
     """User's config panel"""
     
     uploaded_images = Image.objects.all()
+    n_images = len(uploaded_images)
     created_tags = Tag.objects.all()
+    n_tags = len(created_tags)
 
     context = {
         'uploaded_images': uploaded_images,
+        'n_images': n_images,
         'created_tags': created_tags,
+        'n_tags': n_tags,
         }
 
     return render(request, 'user/panel.html', context)
@@ -27,10 +31,8 @@ def upload_image(request):
     """Upload image form's view"""
 
     uploaded_images = Image.objects.all()
-    print(uploaded_images)
     uploaded_images_values = uploaded_images.values()
     uploaded_images_values_json = json.dumps(list(uploaded_images_values), cls=DjangoJSONEncoder)
-    print(uploaded_images_values_json)
     
     if request.method == "POST":
         imageform = UploadImageForm(request.POST or None, request.FILES or None)

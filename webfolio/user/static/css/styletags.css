@@ -1,11 +1,11 @@
 
-html, body, h1 {
+html, body, h1, p {
     margin: 0;
     padding: 0;
     border: 0;
 }
 
-h1 {
+#panTitle {
     text-align: center;
     color: #ececed;
     font-weight: normal;
@@ -64,8 +64,6 @@ button.newFoto {
     border-radius: 25px;
     color:rgba(255, 255, 255, 0.816);
     position: relative;
-    transform: translate(-50%, 0);
-    left: 50%;
     width: 200px;
     text-align: center;
 }
@@ -85,6 +83,7 @@ button.newFoto span {
 
 button.newFoto i {
     vertical-align: middle;
+    pointer-events: none;
 }
 
 button.newFoto:hover {
@@ -92,10 +91,6 @@ button.newFoto:hover {
     -moz-box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
     -webkit-box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
     box-shadow: 0 0 8px 0 rgba(39, 175, 21, 0.5), 0 0 15px 0 rgba(255, 182, 182, 0.3);
-}
-
-button.newFoto i {
-    pointer-events: none;
 }
 
 #grid-container {
@@ -122,19 +117,14 @@ button.newFoto i {
 .cont {
     display: none;
     grid-area: cont;
-    background-color: lightcoral;
 }
   
 .sidenav a {
-    padding: 1em 6px 1em 30px;
-    text-decoration: none;
-    font-size: 1.5em;
-    color: #818181;
-    display: block;
-}
-  
-.sidenav button {
-    padding: 1em 6px 1em 30px;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    padding: 1em 0 1em 0;
     background-color: transparent;
     text-decoration: none;
     width: 25vw;
@@ -145,22 +135,31 @@ button.newFoto i {
     font-family: inherit;
     text-align: left;
 }
+
+.sidenav a p {
+    pointer-events: none;
+    padding-left: 3vw;
+}
   
-.sidenav button:hover {
+.sidenav a:hover {
     color: #f1f1f1;
     -moz-box-shadow: 0 0 8px 0 rgba(21, 121, 175, 0.5), 0 0 15px 0 rgba(195, 232, 252, 0.3);
     -webkit-box-shadow: 0 0 8px 0 rgba(21, 121, 175, 0.5), 0 0 15px 0 rgba(195, 232, 252, 0.3);
     box-shadow: 0 0 8px 0 rgba(21, 121, 175, 0.5), 0 0 15px 0 rgba(195, 232, 252, 0.3);
 }
 
-.sidenav button:focus {
+.sidenav a.active {
     color: #f1f1f1;
-    background-color: rgba(19, 44, 56, 0.693);;
+    background-color: rgba(19, 44, 56, 0.693);
     border: none;
     outline: none;
     -moz-box-shadow: inset 0 0 8px 0 rgba(21, 121, 175, 0.5), inset 0 0 15px 0 rgba(130, 167, 187, 0.3);
     -webkit-box-shadow: inset 0 0 8px 0 rgba(21, 121, 175, 0.5), inset 0 0 15px 0 rgba(130, 167, 187, 0.3);
     box-shadow: inset 0 0 8px 0 rgba(21, 121, 175, 0.5), inset 0 0 15px 0 rgba(130, 167, 187, 0.3);
+}
+
+.sidenav a:focus {
+    outline: none;
 }
 
 .sep {
@@ -176,3 +175,9 @@ button.newFoto i {
 #over {
     display: block;
 }
+
+.column {
+    flex: 50%;
+    padding: 10px;
+}
+

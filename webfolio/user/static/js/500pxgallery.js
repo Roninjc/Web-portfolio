@@ -102,7 +102,8 @@ function gallery_creator(gallery) {
                 galleryGrid.appendChild(figureGrid);
                 img.src = imgPath;
                 img.setAttribute("id", "Im" + i);
-                img.setAttribute("height", maxHeightRow);
+                img.style.height = maxHeightRow;
+                console.log(maxHeightRow);
                 figureGrid.appendChild(img);
                 div1.classList.add("pig-div");
                 figureGrid.appendChild(div1);

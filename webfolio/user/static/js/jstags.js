@@ -44,3 +44,29 @@ window.onload = function() {
         disp("creator");
     }
 }
+
+function chButton(event) {
+    var tarButt = event.target;
+    console.log(tarButt);
+    var current = document.getElementsByClassName("active");
+    console.log(current);
+    current[0].classList.remove("active");
+    tarButt.classList.add("active");
+    var dele = document.querySelectorAll(".cont");
+    for (i = 0; i < dele.length; i++) {
+        var style = getComputedStyle(dele[i]);
+        var dp = style.display;
+        if (dp !== "none") {
+            dele[i].style.display = "none";
+        }
+    }
+    var chil = tarButt.querySelector("p");
+    var name = chil.innerHTML.replace(/\s/g, "").toLowerCase().substring(0, 4);
+    var elem = document.getElementById(name);
+    console.log(elem);
+    if (name == "imag") {
+        elem.style.display = "flex";
+    } else {
+        elem.style.display = "block";
+    }
+}

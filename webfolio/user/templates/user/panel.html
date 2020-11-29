@@ -27,32 +27,60 @@
         
         <div id="grid-container">
             <div id="head">
-                <h1>Configuration panel</h1>
+                <h1 id="panTitle">Configuration panel</h1>
             </div>
             
             <div class="sidenav">
+                <a id="Overview" class="target active" autofocus onclick="chButton(event)">
+                    <p>Overview</p>
+                </a>
                 <hr class="sep">
-                <button autofocus>Overview</button>
+                <a id="Images&Tags" class="target" onclick="chButton(event)">
+                    <p>Images and tags</p>
+                </a>
                 <hr class="sep">
-                <button href="#">Images and tags</button>
+                <a id="Landing" class="target" onclick="chButton(event)">
+                    <p>Landing page</p>
+                </a>
                 <hr class="sep">
-                <button href="#">Landing page</button>
+                <a id="About" class="target" onclick="chButton(event)">
+                    <p>About me page</p>
+                </a>
                 <hr class="sep">
-                <button href="#">About me page</button>
+                <a id="GetInvolved" class="target" onclick="chButton(event)">
+                    <p>Get involved page</p>
+                </a>
                 <hr class="sep">
-                <button href="#">Get involved page</button>
-                <hr class="sep">
-                <button href="#">Contact page</button>
+                <a id="Contact" class="target" onclick="chButton(event)">
+                    <p>Contact page</p>
+                </a>
             </div>
     
             <div id="over" class="cont">
-                kjds,hgslk
+                Overview
             </div>
-            <div id="imta" class="cont"></div>
-            <div id="land" class="cont"></div>
-            <div id="abou" class="cont"></div>
-            <div id="geti" class="cont"></div>
-            <div id="cont" class="cont"></div>
+            <div id="imag" class="cont">
+                <div id="upimage" class="column">
+                    You have uploaded {{ n_images }} images.
+                    <a href="{% url 'upload-image' %}">Go to images</a>
+                </div>
+                <div id="uptag"class="column">
+                    You have uploaded {{ n_tags }} tags.
+                    <a href="{% url 'create-tag' %}">Go to images</a>
+                </div>
+            </div>
+            <div id="land" class="cont">
+                Landing
+            </div>
+            <div id="abou" class="cont">
+                About me
+            </div>
+            <div id="geti" class="cont">
+                Get involved
+            </div>
+            <div id="cont" class="cont">
+                Contact
+            </div>
         </div>
     
     </div>
