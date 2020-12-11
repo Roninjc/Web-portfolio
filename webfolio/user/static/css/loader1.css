@@ -1,0 +1,96 @@
+/* HTML
+<div id="outainer">
+<div class="loading">
+    <div class="loading-text">
+        <span id="loading-text-words1">L</span>
+        <span id="loading-text-words2">O</span>
+        <span id="loading-text-words3">A</span>
+        <span id="loading-text-words4">D</span>
+        <span id="loading-text-words5">I</span>
+        <span id="loading-text-words6">N</span>
+        <span id="loading-text-words7">G</span>
+    </div>
+</div>
+</div>
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Quattrocento+Sans);
+
+#outainer {
+	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    height: 100vh;
+    transition: opacity 5s ease;
+}
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	z-index: 9999;
+}
+
+.loading-text {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+    font-family: 'Quattrocento Sans', sans-serif;
+}
+
+.loading-text span {
+    display: inline-block;
+    margin: 0 5px;
+    color: #000;
+    filter: blur(0px);
+}
+
+#loading-text-words1 {
+    animation: blur-text 1.4s linear infinite alternate;
+}
+
+#loading-text-words2 {
+    animation: blur-text 1.4s linear infinite alternate;
+    animation-delay: 0.1s;
+}
+
+#loading-text-words3 {
+    animation: blur-text 1.4s linear infinite alternate;
+    animation-delay: 0.2s;
+}
+
+#loading-text-words4 {
+    animation: blur-text 1.4s linear infinite alternate;
+    animation-delay: 0.3s;
+}
+
+#loading-text-words5 {
+    animation: blur-text 1.4s linear infinite alternate;
+    animation-delay: 0.4s;
+}
+
+#loading-text-words6 {
+    animation: blur-text 1.4s linear infinite alternate;
+    animation-delay: 0.5s;
+}
+
+#loading-text-words7 {
+    animation: blur-text 1.4s linear infinite alternate;
+    animation-delay: 0.6s;
+}
+
+@keyframes blur-text {
+	0% {filter: blur(0px);}
+	100% {filter: blur(4px);}
+}

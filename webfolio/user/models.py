@@ -14,7 +14,6 @@ class Tag(models.Model):
     def __str__(self,):
         return self.tag_name
         
-
 class Image(models.Model):
     """Images model"""
 
@@ -32,10 +31,23 @@ class Image(models.Model):
     updated = models.DateTimeField(editable=False)
 
     def __str__(self,):
-        return self.name + ": " + str(self.image_file)
+        return self.name + ": " + str(self.image_file) + str(self.tags)
 
     def save(self):
         if not self.id:
             self.created = datetime.datetime.today()
         self.updated = datetime.datetime.today()
         super(Image, self).save()
+
+class About(models.Model):
+    """About page options"""
+
+    enable = models.BooleanField(default=True)
+    description = models.TextField(max_length=2000)
+
+class Involved(models.Model):
+    """Get involved page options"""
+
+class Contac(models.Model):
+    """Contact page options"""
+    

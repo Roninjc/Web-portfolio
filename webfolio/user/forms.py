@@ -43,7 +43,6 @@ class UploadImageForm(forms.ModelForm):
         self.save_m2m = save_m2m
 
         def set_dimension():
-            print(instance.image_file.height)
             Image.height = instance.image_file.height
             Image.width = instance.image_file.width
         self.set_dimension = set_dimension

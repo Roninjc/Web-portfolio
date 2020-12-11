@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tags</title>
     <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'css/500pxgallery.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <script src="{% static 'js/jstags.js' %}"></script>  
@@ -25,7 +26,9 @@
             {% endfor %}
         {% endif %}
 
-        <h1>Tag scheme</h1>
+        <div id="header">
+            <h1>Tag scheme</h1>
+        </div>
 
         <button class="newFoto" onclick="tagForm()">
             <span>Create tag</span>
@@ -46,7 +49,9 @@
                             <td>{{ tag.tag_name }}</td>
                             <td>{{ tag.is_a_gallery }}</td>
                             <td>
-                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value, 'tag')">Delete</button>
+                                <button value="{{ tag.pk }},{{ tag.tag_name }}" onclick="tagRem(value, 'tag')">
+                                    <i class="material-icons delImg">delete_outline</i>
+                                </button>
                             </td>
                         </tr>
                     {% endfor %}
