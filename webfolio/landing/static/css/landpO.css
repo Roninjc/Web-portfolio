@@ -1,0 +1,203 @@
+html, body, div, span, applet, object, iframe, li, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: top;
+    color: #fff;
+}
+
+body {
+    font-family: 'Merriweather', serif;
+    -webkit-text-size-adjust: none;
+    background:#000;
+}
+
+/* menu */
+
+.stuck_container {
+    padding: 15px 0;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 740px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 960px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 960px;
+    }
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: 300px;
+}
+
+.container:before, .container:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.container:after {
+  clear: both;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+   
+/* items del menu */
+
+#menu {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+}
+
+#menu ul {
+    list-style:none;
+    padding: 5px 0;
+    margin:0;
+}
+
+.sf-menu {
+    display: inline-block;
+    padding: 5px 0;
+}
+
+@media (max-width: 767px) {
+    .sf-menu {
+        display: none;
+    }
+}
+.sf-menu:before, .sf-menu:after {
+    display: table;
+    content: "";
+    line-height: 10;
+}
+.sf-menu:after {
+    clear: both;
+}
+
+.sf-menu > li + li {
+    margin-left: 100px;
+}
+.sf-menu > li + li:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: -50px;
+    width: 1px;
+    height: 35px;
+    background: #3F4742;
+}
+@media (max-width: 991px) {
+    .sf-menu > li + li {
+        margin-left: 50px;
+    }
+    .sf-menu > li + li:before {
+        left: -25px;
+    }
+}
+   
+/* enlaces del menu */
+
+#menu ul a {
+    text-decoration:none;
+    letter-spacing:1px;
+    -moz-transition: 0.3s 0.7s;
+    -o-transition: 0.3s 0.7s;
+    -webkit-transition: 0.3s 0.7s;
+    transition: 0.3s 0.7s;
+}
+   
+#menu ul li {
+    position:relative;
+    display: inherit;
+}
+
+.sf-menu > li.active > a {
+    color: #535755;
+}
+   
+/* efecto al pasar el ratón por los items del menu */
+   
+.sf-menu > li.sfHover > a, #menu ul li:hover > a {
+    color: #535755;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/* menu desplegable */
+
+#menu ul ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: -45px;
+    width: 200px;
+    margin-top: 15px;
+    padding: 22px 0 22px 26px;
+    background: #5d7562;
+    z-index: 2;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: "Merriweather", serif;
+    font-weight: 500;
+    text-align: left;
+    -moz-transition: visibility 0s 1s, opacity 0.3s ease 0.7s;
+    -o-transition: visibility 0s 1s, opacity 0.3s ease 0.7s;
+    -webkit-transition: visibility 0s 1s, opacity 0.3s ease 0.7s;
+    transition: visibility 0s 1s, opacity 0.3s ease 0.7s;
+}
+
+/* items del menu desplegable */
+
+#menu ul ul li {
+    float:none;
+    width:150px;
+}
+   
+/* enlaces de los items del menu desplegable */
+   
+#menu ul ul a {
+    line-height:120%;
+    padding:10px 15px;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+   
+/* items del menu desplegable al pasar el ratón */
+   
+#menu ul li:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    -moz-transition: visibility 0s 0s, opacity 0.3s ease 0s;
+    -o-transition: visibility 0s 0s, opacity 0.3s ease 0s;
+    -webkit-transition: visibility 0s 0s, opacity 0.3s ease 0s;
+    transition: visibility 0s 0s, opacity 0.3s ease 0s;
+}

@@ -37,19 +37,21 @@
             <i class="material-icons">add</i>
         </button>
 
-        <div id="outainer">
-            <div class="loading">
-                <div class="loading-text">
-                    <span id="loading-text-words1">L</span>
-                    <span id="loading-text-words2">O</span>
-                    <span id="loading-text-words3">A</span>
-                    <span id="loading-text-words4">D</span>
-                    <span id="loading-text-words5">I</span>
-                    <span id="loading-text-words6">N</span>
-                    <span id="loading-text-words7">G</span>
+        {% if uploaded_images %}
+            <div id="outainer">
+                <div class="loading">
+                    <div class="loading-text">
+                        <span id="loading-text-words1">L</span>
+                        <span id="loading-text-words2">O</span>
+                        <span id="loading-text-words3">A</span>
+                        <span id="loading-text-words4">D</span>
+                        <span id="loading-text-words5">I</span>
+                        <span id="loading-text-words6">N</span>
+                        <span id="loading-text-words7">G</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         <section id="imgGrid">
             {% if uploaded_images %}

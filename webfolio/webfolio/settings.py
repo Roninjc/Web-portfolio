@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'webfolio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'portfolio',
+        'USER': 'me',
+        'PASSWORD': 'eevaneyy',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -125,3 +129,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,  'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/user/'
+LOGOUT_REDIRECT_URL = '/user/logout'

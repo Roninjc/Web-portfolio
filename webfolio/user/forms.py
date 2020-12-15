@@ -30,8 +30,9 @@ class UploadImageForm(forms.ModelForm):
 
         forms.ModelForm.__init__(self, *args, **kwargs)
 
-    def save(self, commit=True):
+    def save(self, request, commit=True):
         # Get the unsave Image instance
+        self.instance.user = request.user
         instance = forms.ModelForm.save(self, False)
 
         # Prepare a 'save_m2m' method for the form,
@@ -44,7 +45,7 @@ class UploadImageForm(forms.ModelForm):
 
         def set_dimension():
             Image.height = instance.image_file.height
-            Image.width = instance.image_file.width
+            Image.width = instance.image_file.width_field
         self.set_dimension = set_dimension
 
         # Do we need to save all changes now?

@@ -1,10 +1,12 @@
 """user MODELS Configuration"""
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 
 class Tag(models.Model):
     """Tags model"""
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tag_name = models.CharField(unique=True, blank=False, max_length=60)
     is_a_gallery = models.BooleanField(default=False)
 
@@ -17,6 +19,7 @@ class Tag(models.Model):
 class Image(models.Model):
     """Images model"""
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     image_file = models.ImageField(
         upload_to = 'user/images/',
@@ -39,15 +42,4 @@ class Image(models.Model):
         self.updated = datetime.datetime.today()
         super(Image, self).save()
 
-class About(models.Model):
-    """About page options"""
 
-    enable = models.BooleanField(default=True)
-    description = models.TextField(max_length=2000)
-
-class Involved(models.Model):
-    """Get involved page options"""
-
-class Contac(models.Model):
-    """Contact page options"""
-    

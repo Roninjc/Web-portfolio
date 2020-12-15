@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from .models import Image, Tag
 from .forms import UploadImageForm, CreateTagForm
@@ -10,6 +12,7 @@ import time
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
+@login_required
 def user_panel(request):
     """User's config panel"""
     
@@ -23,10 +26,12 @@ def user_panel(request):
         'n_images': n_images,
         'created_tags': created_tags,
         'n_tags': n_tags,
+        'user': request.user,
         }
 
     return render(request, 'user/panel.html', context)
 
+@login_required
 def upload_image(request):
     """Upload image form's view"""
 
@@ -36,8 +41,9 @@ def upload_image(request):
     
     if request.method == "POST":
         imageform = UploadImageForm(request.POST or None, request.FILES or None)
+        print(request.user)
         if imageform.is_valid():
-            imageform.save()
+            imageform.save(request)
             messages.success(request, 'Image uploaded succesfully')
             return redirect('/user/imup')
     else:
@@ -51,6 +57,7 @@ def upload_image(request):
 
     return render(request, 'user/images.html', context)
 
+@login_required
 def create_tags(request):
     
     """Create tags form's view"""
@@ -60,7 +67,9 @@ def create_tags(request):
     if request.method == "POST":
         tagform = CreateTagForm(request.POST, request.FILES)
         if tagform.is_valid():
-            tagform.save()
+            instance = tagform.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(request, 'Tag added succesfully')
             return redirect('/user/tacr')
         else:
@@ -82,6 +91,7 @@ def create_tags(request):
 
     return render(request, 'user/tags.html', context)
 
+@login_required
 def delete_obj(request, mode, pk):
     """Delete speific object from database"""
 
@@ -100,3 +110,7 @@ def delete_obj(request, mode, pk):
         return redirect('/user/' + mode)
 
     return render(request, 'user/' + wh + 's.html', {'tag': tag})
+
+def logout(request):
+
+    return render(request, 'user/logout.html')

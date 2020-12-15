@@ -22,4 +22,5 @@ urlpatterns = [
     path('imup', views.upload_image, name='upload-image'),
     path('tacr', views.create_tags, name='create-tag'),
     path('', views.user_panel, name='user-panel'),
+    path('logout', views.logout, name='logout'),
 ]
