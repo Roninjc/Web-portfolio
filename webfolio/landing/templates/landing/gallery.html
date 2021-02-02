@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+
+    <!-- Main Stylesheets -->	
+    <link rel="stylesheet" href="{% static 'css/landpO.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header1.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}"/>
+    <link rel='stylesheet' type="text/css" href="{% static 'css/styletags.css' %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'css/500pxgallery.css' %}">
+    <link rel='stylesheet' type="text/css" href="{% static 'css/loader1.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static 'js/jstags.js' %}"></script>
+    <script src="{% static 'js/500pxgallery.js' %}"></script>
+</head>
+<body>
+	<!-- Header Section -->
+	{% include 'includes/header1.html' %}
+    
+	<!-- Header Section end -->
+    <h1 id="gallery-tag">{{ gallery_tag }}</h1>
+    
+    {% if uploaded_images %}
+        <div id="outainer">
+            <div class="loading">
+                <div class="loading-text">
+                    <span id="loading-text-words1">L</span>
+                    <span id="loading-text-words2">O</span>
+                    <span id="loading-text-words3">A</span>
+                    <span id="loading-text-words4">D</span>
+                    <span id="loading-text-words5">I</span>
+                    <span id="loading-text-words6">N</span>
+                    <span id="loading-text-words7">G</span>
+                </div>
+            </div>
+        </div>
+
+        {% include "user/500pxgallery.html" %}
+    {% else %}
+        <h3>No images yet. What are you waiting for to upload the first one?</h3>
+    {% endif %}
+</body>
+</html>

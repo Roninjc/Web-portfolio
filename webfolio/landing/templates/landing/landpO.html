@@ -1,4 +1,5 @@
 {% load static %}
+{% load landing_extras %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +9,22 @@
 
 	<!-- Main Stylesheets -->	
     <link rel="stylesheet" href="{% static 'css/landpO.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header1.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <script src="{% static 'js/landpO.js' %}"></script>
     
 </head>
+{% with "/media/"|addstr:background as bg_img %}
+<style>
+    body {
+        background: url('{{ bg_img }}');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+{% endwith %}
 <body>
 	<!-- Page Preloder 
 	<div id="preloder">
@@ -20,46 +32,7 @@
 	</div>-->
 
 	<!-- Header Section -->
-	<header class="header">
-		<div id="stuck_container" class="stuck_container">
-            <div class="container">
-                <nav id="menu">
-                    <!--Sf-menu-->
-                    <ul class="sf-menu sf-js-enabled sf-arrows" data-type="navbar">
-                        <li class="active">
-                            <a href="./">Home</a>
-                        </li>
-                        <li>
-                            <a href="index-1.html">Gallery</a>
-                            <ul>
-                                {% if galleries %}
-                                    {% for tag in galleries %}
-                                        <li>
-                                            <a href="#">{{ tag.tag_name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                {% else %}
-                                    <li>
-                                        <a href="#">Nothing here</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="index-2.html">About me</a>
-                        </li>
-                        <li>
-                            <a href="index-3.html">Get Involved</a>
-                        </li>
-                        <li>
-                            <a href="index-4.html">Contacts</a>
-                        </li>
-                    </ul>
-                    <!--End Sf-menu-->
-                </nav>
-            </div>
-        </div>
-    </header>
+	{% include 'includes/header1.html' %}
     
 	<!-- Header Section end -->
 </body>

@@ -13,7 +13,7 @@ class Tag(models.Model):
     class Meta:
         ordering = ["tag_name"]
 
-    def __str__(self,):
+    def __str__(self):
         return self.tag_name
         
 class Image(models.Model):
@@ -33,7 +33,7 @@ class Image(models.Model):
     created = models.DateTimeField(editable=False)
     updated = models.DateTimeField(editable=False)
 
-    def __str__(self,):
+    def __str__(self):
         return self.name + ": " + str(self.image_file) + str(self.tags)
 
     def save(self):
@@ -42,4 +42,19 @@ class Image(models.Model):
         self.updated = datetime.datetime.today()
         super(Image, self).save()
 
+class Profile(models.Model):
+    """Profiles model"""
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    artistic_name = models.CharField(max_length=50)
+    web_url = models.CharField(max_length=30, blank=True)
+    logo = models.ImageField(upload_to = 'landing/logos/', blank=True)
+    land_background = models.OneToOneField(Image, on_delete=models.CASCADE, null=True, blank=True, verbose_name="homepage bakground")
+    enable_about_me = models.BooleanField(default=True)
+    about_me = models.TextField(blank=True)
+    enable_contact_me = models.BooleanField(default=True)
+    email = models.EmailField(blank=True)
+    enable_get_involved = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.artistic_name

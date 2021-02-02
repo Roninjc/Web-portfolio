@@ -60,7 +60,13 @@
             <div id="over" class="cont">
                 Overview
                 {{ user }}
-                pass {{ user.pk }}
+                <div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ profileform.as_p }}
+                        <input type="submit" value="Save"/>
+                    </form>
+                </div>
             </div>
             <div id="imag" class="cont">
                 <div id="upimage" class="column">
@@ -77,12 +83,28 @@
             </div>
             <div id="abou" class="cont">
                 About me
+                
+                <div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ profileform.about_me }}
+                        <input type="submit" value="Save"/>
+                    </form>
+                </div>
             </div>
             <div id="geti" class="cont">
                 Get involved
             </div>
             <div id="cont" class="cont">
                 Contact
+
+                <div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ profileform.email }}
+                        <input type="submit" value="Save"/>
+                    </form>
+                </div>
             </div>
         </div>
     

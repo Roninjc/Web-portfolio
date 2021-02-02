@@ -3,22 +3,72 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.models import User
-from user.models import Image, Tag
+from user.models import Image, Tag, Profile
 from user.forms import UploadImageForm, CreateTagForm
+
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def landpage(request, username):
 
-    print(username)
     user = User.objects.get(username=username)
-    print(user)
-    galleries = Tag.objects.filter(user=user, is_a_gallery=True)
+    gallery_tags = Tag.objects.filter(user=user, is_a_gallery=True)
+    profile = Profile.objects.get(user=user)
+    background = profile.land_background.image_file
+    print(background)
 
     context = {
-        'galleries': galleries,
+        'background': background,
+        'gallery_tags': gallery_tags,
+        'user': request.user,
+        'username': username,
         }
 
     return render(request, 'landing/landpO.html', context)
+
+def galleries(request, username):
+
+    user = User.objects.get(username=username)
+    gallery_tags = Tag.objects.filter(user=user, is_a_gallery=True)
+    gallery_imgs = []
+    for tag in gallery_tags:
+        tag_img = Image.objects.filter(user=user, tags=tag, appear_in_album=True,)[:1]
+        gallery_imgs.append(tag_img[0])
+    galleries = [list(x) for x in zip(gallery_tags, gallery_imgs)]
+    print(galleries)
+    
+    for gallery in galleries:
+        img = gallery[1]
+        print(img.image_file)
+
+    context = {
+        'gallery_tags': gallery_tags,
+        'galleries': galleries,
+        'username': username,
+        }
+
+    return render(request, 'landing/galleries.html', context)
+
+def gallery(request, username, gallery):
+    
+    user = User.objects.get(username=username)
+    gallery_tags = Tag.objects.filter(user=user, is_a_gallery=True)
+    gallery_tag = Tag.objects.get(user=user, is_a_gallery=True, tag_name=gallery)
+    
+    uploaded_images = Image.objects.filter(user=user, tags=gallery_tag, appear_in_album=True)
+    uploaded_images_values = uploaded_images.values()
+    uploaded_images_values_json = json.dumps(list(uploaded_images_values), cls=DjangoJSONEncoder)
+    
+    context = {
+        'gallery_tags': gallery_tags,
+        'gallery_tag': gallery_tag,
+        'uploaded_images': uploaded_images,
+        'uploaded_images_values_json': uploaded_images_values_json,
+        'username': username,
+        }
+
+    return render(request, 'landing/gallery.html', context)
 
 def register(request):
 

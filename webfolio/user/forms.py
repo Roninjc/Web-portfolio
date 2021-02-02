@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from django import forms
-from .models import Image, Tag
+from .models import Image, Tag, Profile
 
 import datetime
 
@@ -14,21 +14,11 @@ class UploadImageForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
         fields = ['name', 'image_file', 'tags', 'appear_in_album']
 
-    def __init__(self, *args, **kwargs):
-        # Only in case we build the form from an instance
-        # (otherwise, 'tags' list should be empty)
-        if kwargs.get('instance'):
-            # We get the 'initial' keyword argument or initialize it
-            # as a dict if it didn't exist.                
-            initial = kwargs.setdefault('initial', {})
-            # The widget for a ModelMultipleChoiceField expects
-            # a list of primary key for the selected data.
-            initial['tags'] = [t.pk for t in kwargs['instance'].tag_set.all()]
-
-        forms.ModelForm.__init__(self, *args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        super(UploadImageForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].queryset = Tag.objects.filter(user=user)
 
     def save(self, request, commit=True):
         # Get the unsave Image instance
@@ -71,3 +61,24 @@ class CreateTagForm(forms.ModelForm):
         if tagname and Tag.objects.filter(tag_name__iexact=tagname).exists():
             self.add_error('tag_name', ValidationError(_('This tag already exists.'), code='invalid'))
         return cleaned_data
+
+class ProfileForm(forms.ModelForm):
+    """Profile options management form"""
+
+    class Meta:
+        model = Profile
+        fields = [
+            'artistic_name',
+            'web_url',
+            'logo',
+            'land_background',
+            'enable_about_me',
+            'about_me',
+            'enable_contact_me',
+            'email',
+            'enable_get_involved'
+            ]
+
+    def __init__(self, user, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['land_background'].queryset = Image.objects.filter(user=user)

@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import Image, Tag
-from .forms import UploadImageForm, CreateTagForm
+from .models import Image, Tag, Profile
+from .forms import UploadImageForm, CreateTagForm, ProfileForm
 
 import time
 import json
@@ -16,10 +16,34 @@ from django.core.serializers.json import DjangoJSONEncoder
 def user_panel(request):
     """User's config panel"""
     
-    uploaded_images = Image.objects.all()
+    uploaded_images = Image.objects.filter(user=request.user)
     n_images = len(uploaded_images)
-    created_tags = Tag.objects.all()
+    created_tags = Tag.objects.filter(user=request.user)
     n_tags = len(created_tags)
+
+    try:
+        profile = Profile.objects.get(user=request.user)
+        if request.method == "POST":
+            profileform = ProfileForm(request.user, request.POST, instance=profile)
+            if profileform.is_valid():
+                instance = profileform.instance
+                instance.user = request.user
+                instance.save()
+
+                return redirect('/user')
+        else:
+            profileform = ProfileForm(request.user, instance=profile)
+    except Profile.DoesNotExist:
+        if request.method == "POST":
+            profileform = ProfileForm(request.user, request.POST)
+            if profileform.is_valid():
+                instance = profileform.instance
+                instance.user = request.user
+                instance.save()
+
+                return redirect('/user')
+        else:
+            profileform = ProfileForm(request.user)
 
     context = {
         'uploaded_images': uploaded_images,
@@ -27,6 +51,7 @@ def user_panel(request):
         'created_tags': created_tags,
         'n_tags': n_tags,
         'user': request.user,
+        'profileform': profileform
         }
 
     return render(request, 'user/panel.html', context)
@@ -35,19 +60,18 @@ def user_panel(request):
 def upload_image(request):
     """Upload image form's view"""
 
-    uploaded_images = Image.objects.all()
+    uploaded_images = Image.objects.filter(user=request.user)
     uploaded_images_values = uploaded_images.values()
     uploaded_images_values_json = json.dumps(list(uploaded_images_values), cls=DjangoJSONEncoder)
     
     if request.method == "POST":
-        imageform = UploadImageForm(request.POST or None, request.FILES or None)
-        print(request.user)
+        imageform = UploadImageForm(request.user, request.POST or None, request.FILES or None)
         if imageform.is_valid():
             imageform.save(request)
             messages.success(request, 'Image uploaded succesfully')
             return redirect('/user/imup')
     else:
-        imageform = UploadImageForm()
+        imageform = UploadImageForm(request.user)
 
     context = {
         'imageform': imageform,
@@ -62,7 +86,7 @@ def create_tags(request):
     
     """Create tags form's view"""
     
-    created_tags = Tag.objects.all()
+    created_tags = Tag.objects.filter(user=request.user)
 
     if request.method == "POST":
         tagform = CreateTagForm(request.POST, request.FILES)
@@ -79,7 +103,6 @@ def create_tags(request):
                 for m in e:
                     msg = m['message']
                     messages.error(request, msg)
-            print(errDict)
             tagform = CreateTagForm()
     else:
         tagform = CreateTagForm()

@@ -1,0 +1,47 @@
+{% load static %}
+{% load landing_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galleries</title>
+
+    <!-- Main Stylesheets -->	
+    <link rel="stylesheet" href="{% static 'css/landpO.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/header1.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/galleries.css' %}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="{% static 'js/landpO.js' %}"></script>
+
+</head>
+<body>
+	<!-- Page Preloder 
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>-->
+
+	<!-- Header Section -->
+	{% include 'includes/header1.html' %}
+    
+	<!-- Header Section end -->
+    <!-- Gallery cards section-->
+    <section id="gallery-cards">
+        {% if galleries %}
+            {% for tag, image in galleries %}
+                <div id="{{ tag.tag_name }}" class="gallery-card">
+                    {% with "/media/"|addstr:image.image_file as image_static %}
+                        <img src="{{ image_static }}" alt="Gallery image" class="gimg"/>
+                    {% endwith %}
+                    <div class="tit">
+                        <a href="{% url 'gallery' username tag.tag_name %}">{{ tag.tag_name }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h1>Nothing here!</h1>
+        {% endif %}
+    </section>
+</body>
+</html>

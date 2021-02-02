@@ -1,0 +1,40 @@
+<header class="header">
+    <div id="stuck_container" class="stuck_container blur">
+        <div class="container">
+            <nav id="menu">
+                <!--Sf-menu-->
+                <ul class="sf-menu sf-js-enabled sf-arrows" data-type="navbar">
+                    <li id="home">
+                        <a href="{% url 'landpage' username %}">Home</a>
+                    </li>
+                    <li id="gallery">
+                        <a href="{% url 'galleries' username %}">Gallery</a>
+                        <ul class="blur">
+                            {% if gallery_tags %}
+                                {% for tag in gallery_tags %}
+                                    <li>
+                                        <a href="{% url 'gallery' username tag.tag_name %}">{{ tag.tag_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>
+                                    <a>Nothing here</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index-2.html">About me</a>
+                    </li>
+                    <li>
+                        <a href="index-3.html">Get Involved</a>
+                    </li>
+                    <li>
+                        <a href="index-4.html">Contact</a>
+                    </li>
+                </ul>
+                <!--End Sf-menu-->
+            </nav>
+        </div>
+    </div>
+</header>

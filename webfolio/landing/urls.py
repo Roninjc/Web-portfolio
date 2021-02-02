@@ -19,8 +19,10 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('m/<str:username>/', views.landpage, name='landpage'),
+    path('m/<str:username>', views.landpage, name='landpage'),
     path('register', views.register, name='register'),
+    path('m/<str:username>/galleries', views.galleries, name='galleries'),
+    path('m/<str:username>/galleries/<str:gallery>', views.gallery, name='gallery'),
 ]
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
