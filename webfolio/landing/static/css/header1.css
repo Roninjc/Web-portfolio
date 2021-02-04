@@ -4,9 +4,13 @@
     padding: 10px 0;
 }
 
+.shadow {
+    box-shadow: 0 1px 13px rgba(0, 0, 0, 0.4);
+}
+
 .blur {
-    background-color: rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(9px);
 }
 
 @media (min-width: 768px) {
@@ -50,25 +54,21 @@
    
 /* items del menu */
 
-#menu {
+.header {
     text-align: center;
     font-weight: bold;
     display: block;
 }
 
-#menu ul {
+.header ul {
     list-style:none;
     padding: 5px 0;
     margin:0;
-}
-
-.sf-menu {
     display: inline-block;
-    padding: 5px 0;
 }
 
 @media (max-width: 767px) {
-    .sf-menu {
+    .header {
         display: none;
     }
 }
@@ -109,7 +109,7 @@
    
 /* enlaces del menu */
 
-#menu ul a {
+.header ul a {
     text-decoration:none;
     letter-spacing:1px;
     -moz-transition: 0.3s 0.7s;
@@ -118,19 +118,19 @@
     transition: 0.3s 0.7s;
 }
    
-#menu ul li {
+.header ul li {
     position:relative;
     display: inherit;
 }
 
-.sf-menu > li.active > a {
-    color: #535755;
+.header > li.active > a {
+    color: #737976;
 }
    
 /* efecto al pasar el ratón por los items del menu */
    
-.sf-menu > li.sfHover > a, #menu ul li:hover > a {
-    color: #535755;
+.header ul li:hover > a {
+    color: #737976;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
     -webkit-transition: 0.3s;
@@ -139,12 +139,11 @@
 
 /* menu desplegable */
 
-#menu ul ul {
-    visibility: hidden;
+#dropi {
     opacity: 0;
     position: absolute;
-    top: 100%;
-    left: -45px;
+    top: -500px;
+    left: 220px;
     width: 250px;
     margin-top: 15px;
     padding: 22px 0 22px 26px;
@@ -164,25 +163,16 @@
 
 /* items del menu desplegable */
 
-#menu ul ul li {
+#dropi li {
     float:none;
 }
    
 /* enlaces de los items del menu desplegable */
-   
-#menu ul ul a {
-    line-height: 120%;
-    padding: 0 0 0 9px;
-    -moz-transition: 0.3s;
-    -o-transition: 0.3s;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-    color: rgb(0, 0, 0);
-}
+
    
 /* items del menu desplegable al pasar el ratón */
    
-#menu ul li:hover > ul {
+.header ul li:hover ~ #dropi {
     visibility: visible;
     opacity: 1;
     -moz-transition: visibility 0s 0s, opacity 0.3s ease 0s;

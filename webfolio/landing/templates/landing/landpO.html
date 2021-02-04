@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800;900&display=swap" rel="stylesheet">
     <script src="{% static 'js/landpO.js' %}"></script>
+    <script src="{% static 'js/header1.js' %}"></script>
     
 </head>
 {% with "/media/"|addstr:background as bg_img %}
@@ -24,7 +26,6 @@
         background-size: cover;
     }
 </style>
-{% endwith %}
 <body>
 	<!-- Page Preloder 
 	<div id="preloder">
@@ -33,7 +34,23 @@
 
 	<!-- Header Section -->
 	{% include 'includes/header1.html' %}
+    <!-- Header Section end -->
     
-	<!-- Header Section end -->
+    <div id="bkDiv">
+        <img src="{{ bg_img }}" />
+        <svg width="100%" height="100%">
+            <defs>
+                <filter id="blur" y="0" x="0">
+                    <feGaussianBlur stdDeviation="29"/>
+                </filter>
+                <pattern id="img1" patternUnits="userSpaceOnUse" width="100%" height="100%" filter="url(#blur)">
+                    <image href="{{ bg_img }}" x="0" y="0" width="100%" opacity="0.95" />
+                    <rect width="100%" height="100%" fill="#ffffff" fill-opacity="0.15" />
+                </pattern>
+            </defs>
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" id="theText" fill="url(#img1)">{{ art_name }}</text>
+        </svg>
+    </div>
 </body>
+{% endwith %}
 </html>

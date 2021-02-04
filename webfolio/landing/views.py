@@ -16,9 +16,10 @@ def landpage(request, username):
     gallery_tags = Tag.objects.filter(user=user, is_a_gallery=True)
     profile = Profile.objects.get(user=user)
     background = profile.land_background.image_file
-    print(background)
+    art_name = profile.artistic_name
 
     context = {
+        'art_name': art_name,
         'background': background,
         'gallery_tags': gallery_tags,
         'user': request.user,
