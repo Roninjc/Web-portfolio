@@ -9,6 +9,19 @@
                     </li>
                     <li id="gallery">
                         <a href="{% url 'galleries' username %}">Gallery</a>
+                        <ul id="dropi" class="shadow">
+                            {% if gallery_tags %}
+                                {% for tag in gallery_tags %}
+                                    <li>
+                                        <a href="{% url 'gallery' username tag.tag_name %}">{{ tag.tag_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>
+                                    <a>Nothing here</a>
+                                </li>
+                            {% endif %}
+                        </ul>
                     </li>
                     <li>
                         <a href="index-2.html">About me</a>
@@ -23,20 +36,5 @@
                 <!--End Sf-menu-->
             </nav>
         </div>
-    </div>
-    <div>
-        <ul id="dropi" class="blur shadow">
-            {% if gallery_tags %}
-                {% for tag in gallery_tags %}
-                    <li>
-                        <a href="{% url 'gallery' username tag.tag_name %}">{{ tag.tag_name }}</a>
-                    </li>
-                {% endfor %}
-            {% else %}
-                <li>
-                    <a>Nothing here</a>
-                </li>
-            {% endif %}
-        </ul>
     </div>
 </header>
