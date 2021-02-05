@@ -1,4 +1,5 @@
 {% load static %}
+{% load landing_extras %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,12 +20,35 @@
     <script src="{% static 'js/jstags.js' %}"></script>
     <script src="{% static 'js/500pxgallery.js' %}"></script>
 </head>
+{% with "/media/"|addstr:background as bg_img %}
+<style>
+    #bkDiv {
+        background: url('{{ bg_img }}');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 <body>
 	<!-- Header Section -->
 	{% include 'includes/header1.html' %}
     
 	<!-- Header Section end -->
-    <h1 id="gallery-tag">{{ gallery_tag }}</h1>
+    <div id="bkDiv">
+        <img src="{{ bg_img }}" />
+        <svg width="100%" height="100%">
+            <defs>
+                <filter id="blur" y="0" x="0">
+                    <feGaussianBlur stdDeviation="29"/>
+                </filter>
+                <pattern id="img1" patternUnits="userSpaceOnUse" width="100%" height="100%" filter="url(#blur)">
+                    <image href="{{ bg_img }}" x="0" y="0" width="100%" opacity="0.95" />
+                    <rect width="100%" height="100%" fill="#ffffff" fill-opacity="0.3" />
+                </pattern>
+            </defs>
+        <text x="50%" y="70%" text-anchor="middle" dominant-baseline="middle" id="theText" fill="url(#img1)">{{ gallery_tag }}</text>
+        </svg>
+    </div>
+{% endwith %}
     
     {% if uploaded_images %}
         <div id="outainer">

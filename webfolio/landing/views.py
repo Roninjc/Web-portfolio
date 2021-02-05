@@ -61,7 +61,13 @@ def gallery(request, username, gallery):
     uploaded_images_values = uploaded_images.values()
     uploaded_images_values_json = json.dumps(list(uploaded_images_values), cls=DjangoJSONEncoder)
     
+    background = uploaded_images.last().image_file
+    print(uploaded_images)
+    print(uploaded_images_values)
+    print(background)
+
     context = {
+        'background': background,
         'gallery_tags': gallery_tags,
         'gallery_tag': gallery_tag,
         'uploaded_images': uploaded_images,
