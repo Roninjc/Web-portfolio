@@ -13,6 +13,8 @@
 #gallery-cards {
     margin: 3vh 5vw;
     display: flex;
+    position: relative;
+    top: 30vh;
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: wrap;
