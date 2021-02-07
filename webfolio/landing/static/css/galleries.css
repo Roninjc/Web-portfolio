@@ -45,7 +45,7 @@
     z-index: 2;
 }
 
-.gallery-card .tit a {
+.gallery-card .tit p {
     text-decoration: none;
 }
 
@@ -55,7 +55,6 @@
     cursor: pointer;
     position: relative;
     z-index: 2;
-    pointer-events: none;
 }
 
 .gallery-card .fimg {
@@ -67,4 +66,5 @@
     transition: all 0.5s ease;
     z-index: 1;
     filter: blur(24px);
+    pointer-events: none;
 }

@@ -24,20 +24,22 @@
 
 	<!-- Header Section -->
 	{% include 'includes/header1.html' %}
-    
 	<!-- Header Section end -->
+
     <!-- Gallery cards section-->
     <section id="gallery-cards">
         {% if galleries %}
             {% for tag, image in galleries %}
                 <div id="{{ tag.tag_name }}" class="gallery-card shadow round width">
-                    {% with "/media/"|addstr:image.image_file as image_static %}
-                        <img src="{{ image_static }}" alt="Gallery image" class="gimg round width"/>
-                        <img src="{{ image_static }}" alt="Gallery image" class="fimg round width"/>
-                    {% endwith %}
-                    <div class="tit round width">
-                        <a href="{% url 'gallery' username tag.tag_name %}">{{ tag.tag_name }}</a>
-                    </div>
+                    <a href="{% url 'gallery' username tag.tag_name %}">
+                        {% with "/media/"|addstr:image.image_file as image_static %}
+                            <img src="{{ image_static }}" alt="Gallery image" class="gimg round width"/>
+                            <img src="{{ image_static }}" alt="Gallery image" class="fimg round width"/>
+                        {% endwith %}
+                        <div class="tit round width">
+                            <p>{{ tag.tag_name }}</p>
+                        </div>
+                    </a>
                 </div>
             {% endfor %}
         {% else %}
