@@ -14,7 +14,7 @@ class UploadImageForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ['name', 'image_file', 'tags', 'appear_in_album']
+        fields = ['title', 'image_file', 'tags', 'appear_in_album']
 
     def __init__(self, user, *args, **kwargs):
         super(UploadImageForm, self).__init__(*args, **kwargs)
@@ -54,13 +54,16 @@ class CreateTagForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = ['tag_name', 'is_a_gallery']
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
 
-    def clean(self):
-        cleaned_data = super(CreateTagForm, self).clean()
-        tagname = cleaned_data.get('tag_name')
-        if tagname and Tag.objects.filter(tag_name__iexact=tagname).exists():
+    def clean_tag_name(self):
+        tagname = self.cleaned_data['tag_name']
+        if Tag.objects.filter(user=self.user, tag_name__iexact=tagname).exists():
             self.add_error('tag_name', ValidationError(_('This tag already exists.'), code='invalid'))
-        return cleaned_data
+        return tagname
 
 class ProfileForm(forms.ModelForm):
     """Profile options management form"""

@@ -7,7 +7,7 @@ class Tag(models.Model):
     """Tags model"""
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    tag_name = models.CharField(unique=True, blank=False, max_length=60)
+    tag_name = models.CharField(blank=False, max_length=60)
     is_a_gallery = models.BooleanField(default=False)
 
     class Meta:
@@ -20,7 +20,7 @@ class Image(models.Model):
     """Images model"""
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     image_file = models.ImageField(
         upload_to = 'user/images/',
         unique=True,
@@ -34,7 +34,7 @@ class Image(models.Model):
     updated = models.DateTimeField(editable=False)
 
     def __str__(self):
-        return self.name + ": " + str(self.image_file) + str(self.tags)
+        return self.title
 
     def save(self):
         if not self.id:

@@ -37,7 +37,6 @@ def galleries(request, username):
         tag_img = Image.objects.filter(user=user, tags=tag, appear_in_album=True,)[:1]
         gallery_imgs.append(tag_img[0])
     galleries = [list(x) for x in zip(gallery_tags, gallery_imgs)]
-    print(galleries)
     
     for gallery in galleries:
         img = gallery[1]

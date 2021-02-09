@@ -89,7 +89,7 @@ def create_tags(request):
     created_tags = Tag.objects.filter(user=request.user)
 
     if request.method == "POST":
-        tagform = CreateTagForm(request.POST, request.FILES)
+        tagform = CreateTagForm(request.user, request.POST, request.FILES)
         if tagform.is_valid():
             instance = tagform.save(commit=False)
             instance.user = request.user
@@ -103,9 +103,9 @@ def create_tags(request):
                 for m in e:
                     msg = m['message']
                     messages.error(request, msg)
-            tagform = CreateTagForm()
+            tagform = CreateTagForm(request.user)
     else:
-        tagform = CreateTagForm()
+        tagform = CreateTagForm(request.user)
 
     context = {
         'tagform': tagform,
